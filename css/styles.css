@@ -1,0 +1,163 @@
+:root {
+  /* Colors: */
+  --clr-grey-600: #3d6666;
+  --clr-grey-550: #547878;
+  --clr-grey-500: #5e7a7d;
+  --clr-grey-400: #7f9d9f;
+  --clr-grey-300: #9ebbbd;
+  --clr-grey-200: #c5e4e7;
+  --clr-grey-50: #f3f9fa;
+  --clr-green-900: #00474b;
+  --clr-green-800: #085c61;
+  --clr-green-750: #0d686d;
+  --clr-green-400: #26c2ae;
+  --clr-green-200: #9fe8df;
+  --clr-orange-400: #e17052;
+
+  /* Semantic colors */
+  --clr-attribution: #3e52a3;
+
+  /* Font sizes (in rem) */
+  --fs-2xs: 0.8125rem; /* 13px */
+  --fs-xs: 1rem; /* 16px */
+  --fs-sm: 1.25rem; /* 20px */
+  --fs-md: 1.5rem; /* 24px */
+  --fs-lg: 2rem; /* 32px */
+  --fs-xl: 3rem; /* 48px */
+
+  /* Containers */
+  --wrapper-width: 90rem; /* 1440px */
+
+  /* Spacing scale (rem) */
+  --space-2xs: 0.5rem; /* 8px */
+  --space-xs: 1rem; /* 16px */
+  --space-sm: 1.5rem; /* 24px */
+  --space-md: 2rem; /* 32px */
+  --space-lg: 3rem; /* 48px */
+  --space-xl: 5rem; /* 80px */
+  --space-2xl: 6rem; /* 96px */
+  --space-3xl: 7.5rem; /* 120px */
+  --space-4xl: 8rem; /* 128px */
+
+  /* Border-radius scale */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.875rem; /* 14px */
+  --radius-lg: 1.5rem; /* 24px */
+  --radius-circle: 50%; /* circular elements */
+
+  /* Line heights */
+  --lh-base: 0.68;
+}
+
+/* 
+********************************
+SELF-HOSTING FONT:
+********************************
+*/
+
+/* STATIC FONT: */
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/assets/fonts/SpaceMono-Bold.woff2') format('woff2'),
+    url('/assets/fonts/SpaceMono-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 
+********************************
+GLOBAL CSS VALUES:
+********************************
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+body {
+  font-family: 'Space Mono', sans-serif;
+  font-size: var(--fs-xs);
+  font-weight: bold;
+  line-height: var(--lh-base);
+  letter-spacing: 0;
+
+  color: var(--clr-grey-500);
+  background-color: var(--clr-grey-200);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 
+********************************
+MAIN:
+********************************
+*/
+h1 {
+  text-align: center;
+  font-size: var(--fs-xl);
+  color: var(--clr-purple-950);
+}
+/* 
+********************************
+FOOTER:
+********************************
+*/
+.attribution {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+
+  font-size: var(--fs-xs);
+  color: var(--clr-attribution);
+}
+
+/* LINKS */
+/* Default State */
+.attribution a:link {
+  color: var(--clr-attribution);
+  text-decoration: none;
+}
+
+/* Visited State */
+.attribution a:visited {
+  color: var(--clr-attribution);
+}
+
+/* State On Hover / Whilst being clicked */
+.attribution a:hover,
+.attribution a:active {
+  opacity: 0.75;
+}
+
+/* 
+********************************
+UTILITY CLASSES:
+********************************
+*/
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
