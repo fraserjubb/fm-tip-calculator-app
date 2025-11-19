@@ -18,46 +18,46 @@
         <img src="assets/images/logo.svg" alt="" class="header__logo" />
         <h1 class="visually-hidden">Tip Calculator</h1>
       </header>
-      <main class="calculator__container">
-        <section class="calculator__options">
-          <article class="calculator__bill">
-            <h2 class="calculator__options-title">Bill</h2>
-            <input type="number" class="calculator__input" />
-          </article>
-          <article class="calculator__tip-selection">
-            <h2 class="calculator__options-title">Select Tip %</h2>
-            <ul class="calculator__tip-selection-list">
-              <li><button class="calculator__tip-option">5%</button></li>
-              <li><button class="calculator__tip-option">10%</button></li>
-              <li><button class="calculator__tip-option">15%</button></li>
-              <li><button class="calculator__tip-option">25%</button></li>
-              <li><button class="calculator__tip-option">50%</button></li>
-              <li><button class="calculator__tip-option">Custom</button></li>
+      <main class="calculator">
+        <section class="calculator__setup">
+          <div class="calculator__setup-group">
+            <label class="calculator__setup-title" for="bill-input">Bill</label>
+            <input id="bill-input" type="number" min="0" class="calculator__input" />
+          </div>
+          <div class="calculator__setup-group">
+            <p class="calculator__setup-title" role="group" aria-labelledby="tip-title">Select Tip %</p>
+            <ul class="calculator__tip-buttons">
+              <li><button type="button" class="calculator__tip-option">5%</button></li>
+              <li><button type="button" class="calculator__tip-option">10%</button></li>
+              <li><button type="button" class="calculator__tip-option calculator__tip-option--selected">15%</button></li>
+              <li><button type="button" class="calculator__tip-option">25%</button></li>
+              <li><button type="button" class="calculator__tip-option">50%</button></li>
+              <li><button type="button" class="calculator__tip-option">Custom</button></li>
             </ul>
-          </article>
-          <article class="calculator__people-amount">
-            <h2 class="calculator__options-title">Number of People</h2>
-            <input type="number" class="calculator__input" />
-          </article>
+          </div>
+          <div class="calculator__setup-group">
+            <label class="calculator__setup-title" for="people-input">Number of People</label>
+            <input id="people-input" type="number" min="0" class="calculator__input" />
+          </div>
         </section>
         <section class="calculator__overview">
-          <article class="calculator__summary">
+          <div class="calculator__summary">
             <div class="calculator__summary-section">
-              <h2 class="calculator__summary-title">Tip Amount<span class="calculator__summary-title-small">/person</span></h2>
+              <p class="calculator__summary-title">Tip Amount<span class="calculator__summary-title-small">/person</span></p>
               <p class="calculator__summary-tip-value">$--.--</p>
             </div>
             <div class="calculator__summary-section">
-              <h2 class="calculator__summary-title">Total<span class="calculator__summary-title-small">/person</span></h2>
+              <p class="calculator__summary-title">Total<span class="calculator__summary-title-small">/person</span></p>
               <p class="calculator__summary-tip-value">$--.--</p>
             </div>
-          </article>
-          <button class="calculator__reset-button">Reset</button>
+          </div>
+          <button type="button" class="calculator__reset-button">Reset</button>
         </section>
       </main>
+      <footer class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io/profile/fraserjubb" target="_blank" rel="noopener noreferrer">Frontend Mentor</a>. Coded by
+        <a href="https://www.frontendmentor.io/profile/fraserjubb" target="_blank" rel="noopener noreferrer">Fraser Jubb</a>.
+      </footer>
     </div>
-    <footer class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io/profile/fraserjubb" target="_blank" rel="noopener noreferrer">Frontend Mentor</a>. Coded by
-      <a href="https://www.frontendmentor.io/profile/fraserjubb" target="_blank" rel="noopener noreferrer">Fraser Jubb</a>.
-    </footer>
   </body>
 </html>
