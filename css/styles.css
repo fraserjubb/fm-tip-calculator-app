@@ -25,8 +25,9 @@
   --fs-lg: 2rem; /* 32px */
   --fs-xl: 3rem; /* 48px */
 
-  /* Containers */
-  --wrapper-width: 90rem; /* 1440px */
+  /* Containers & Dimensions */
+  --calculator-width: 57.5rem; /* 920px */
+  --calculator-height: 30rem; /* 480px */
 
   /* Spacing scale (rem) */
   --space-2xs: 0.5rem; /* 8px */
@@ -109,11 +110,114 @@ svg {
 MAIN:
 ********************************
 */
-h1 {
-  text-align: center;
-  font-size: var(--fs-xl);
-  color: var(--clr-purple-950);
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
+
+.header {
+  margin-bottom: 87.86px;
+}
+
+.header__logo {
+}
+
+.visually-hidden {
+}
+
+.calculator {
+  display: flex;
+  gap: var(--space-lg);
+  max-width: var(--calculator-width);
+  width: 100%;
+  height: var(--calculator-height);
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  background-color: white;
+}
+
+.calculator__setup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 40px;
+  width: 50%;
+  background-color: red;
+}
+
+.calculator__setup-group {
+}
+
+.calculator__setup-title {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.calculator__input {
+  width: 100%;
+  height: 48px;
+}
+
+.calculator__tip-buttons {
+  list-style: none;
+}
+
+.calculator__tip-option {
+}
+
+.calculator__tip-option--selected {
+}
+
+.calculator__summary {
+  width: 50%;
+  padding: 32px;
+  border-radius: var(--radius-md);
+  background-color: var(--clr-green-900);
+}
+
+.calculator__summary-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 24px;
+  height: 166px;
+  background-color: hotpink;
+  margin-bottom: 128px;
+}
+
+.calculator__summary-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calculator__summary-title {
+}
+
+.calculator__summary-title--sub {
+  display: block;
+  font-size: smaller; /* optional */
+  color: gray; /* optional */
+}
+.calculator__summary-value {
+  font-size: var(--fs-xl);
+  color: var(--clr-green-400);
+}
+
+.calculator__reset {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: var(--radius-sm);
+
+  text-transform: uppercase;
+  font-size: var(--fs-sm);
+  color: var(--clr-green-900);
+  background-color: var(--clr-green-400);
+}
+
 /* 
 ********************************
 FOOTER:
