@@ -15,17 +15,17 @@
   <body>
     <div class="wrapper">
       <header class="header">
-        <img src="assets/images/logo.svg" alt="" class="header__logo" />
+        <img src="assets/images/logo.svg" alt="Company logo" class="header__logo" />
         <h1 class="visually-hidden">Tip Calculator</h1>
       </header>
       <main class="calculator">
         <section class="calculator__setup">
           <div class="calculator__setup-group">
             <label class="calculator__setup-title" for="bill-input">Bill</label>
-            <input id="bill-input" type="number" min="0" class="calculator__input" />
+            <input id="bill-input" type="number" min="0" step="0.01" class="calculator__input" />
           </div>
           <div class="calculator__setup-group">
-            <p class="calculator__setup-title" role="group" aria-labelledby="tip-title">Select Tip %</p>
+            <p class="calculator__setup-title">Select Tip %</p>
             <ul class="calculator__tip-buttons">
               <li><button type="button" class="calculator__tip-option">5%</button></li>
               <li><button type="button" class="calculator__tip-option">10%</button></li>
@@ -40,18 +40,18 @@
             <input id="people-input" type="number" min="0" class="calculator__input" />
           </div>
         </section>
-        <section class="calculator__overview">
-          <div class="calculator__summary">
-            <div class="calculator__summary-section">
-              <p class="calculator__summary-title">Tip Amount<span class="calculator__summary-title-small">/person</span></p>
-              <p class="calculator__summary-tip-value">$--.--</p>
+        <section class="calculator__summary">
+          <div class="calculator__summary-content">
+            <div class="calculator__summary-item">
+              <p class="calculator__summary-title">Tip Amount<span class="calculator__summary-title--sub">/person</span></p>
+              <p class="calculator__summary-value">$--.--</p>
             </div>
-            <div class="calculator__summary-section">
-              <p class="calculator__summary-title">Total<span class="calculator__summary-title-small">/person</span></p>
-              <p class="calculator__summary-tip-value">$--.--</p>
+            <div class="calculator__summary-item">
+              <p class="calculator__summary-title">Total<span class="calculator__summary-title--sub">/person</span></p>
+              <p class="calculator__summary-value">$--.--</p>
             </div>
           </div>
-          <button type="button" class="calculator__reset-button">Reset</button>
+          <button type="button" class="calculator__reset">Reset</button>
         </section>
       </main>
       <footer class="attribution">
