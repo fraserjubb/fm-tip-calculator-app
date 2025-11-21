@@ -162,8 +162,7 @@ MAIN:
 
   font-size: var(--fs-md);
 
-  /* Input icon */
-  background-image: url('/assets/images/icon-dollar.svg');
+  /* Input icons positioning */
   background-repeat: no-repeat;
   background-position: left 18px center;
   text-align: right;
@@ -179,6 +178,15 @@ MAIN:
 .calculator__input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* Input icons */
+#bill-input {
+  background-image: url('/assets/images/icon-dollar.svg');
+}
+
+#people-input {
+  background-image: url('/assets/images/icon-person.svg');
 }
 
 .calculator__tip-buttons {
