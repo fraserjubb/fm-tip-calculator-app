@@ -47,7 +47,7 @@
   --radius-circle: 50%; /* circular elements */
 
   /* Line heights */
-  --lh-base: 0.68;
+  --lh-base: 1.5;
 }
 
 /* 
@@ -110,6 +110,9 @@ svg {
 MAIN:
 ********************************
 */
+* {
+  /* border: solid hotpink 1px; */
+}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -130,11 +133,12 @@ MAIN:
 
 .calculator {
   display: flex;
-  gap: var(--space-lg);
+  justify-content: space-between;
+  /* gap: var(--space-lg); */
   max-width: var(--calculator-width);
   width: 100%;
   height: var(--calculator-height);
-  padding: var(--space-md);
+  padding: var(--space-md) 40px;
   border-radius: var(--radius-lg);
   background-color: white;
 }
@@ -144,11 +148,12 @@ MAIN:
   flex-direction: column;
   justify-content: space-around;
   gap: 40px;
-  width: 50%;
-  background-color: red;
+  width: 380px;
+  /* background-color: red; */
 }
 
 .calculator__setup-group {
+  /* width: 100%; */
 }
 
 .calculator__setup-title {
@@ -159,20 +164,38 @@ MAIN:
 .calculator__input {
   width: 100%;
   height: 48px;
+  background-color: var(--clr-grey-50);
+  border: none;
+  border-radius: var(--radius-sm);
 }
 
 .calculator__tip-buttons {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, 116px);
   list-style: none;
+  /* width: 380px; */
 }
 
 .calculator__tip-option {
+  width: 116px;
+  height: 48px;
+  border: none;
+  border-radius: var(--radius-sm);
+
+  font-size: var(--fs-md);
+
+  background-color: var(--clr-green-900);
+  color: white;
 }
 
 .calculator__tip-option--selected {
+  background-color: var(--clr-green-400);
+  color: var(--clr-green-900);
 }
 
 .calculator__summary {
-  width: 50%;
+  width: 413px;
   padding: 32px;
   border-radius: var(--radius-md);
   background-color: var(--clr-green-900);
@@ -184,7 +207,6 @@ MAIN:
   justify-content: space-around;
   gap: 24px;
   height: 166px;
-  background-color: hotpink;
   margin-bottom: 128px;
 }
 
@@ -194,12 +216,13 @@ MAIN:
 }
 
 .calculator__summary-title {
+  color: white;
 }
 
 .calculator__summary-title--sub {
   display: block;
-  font-size: smaller; /* optional */
-  color: gray; /* optional */
+  font-size: var(--fs-2xs);
+  color: var(--clr-grey-400);
 }
 .calculator__summary-value {
   font-size: var(--fs-xl);
