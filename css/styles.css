@@ -134,6 +134,8 @@ MAIN:
   padding: var(--space-md) 40px;
   background-color: white;
   border-radius: var(--radius-lg);
+
+  box-shadow: 0px 32px 43px 0px rgba(79, 165, 175, 0.207);
 }
 
 .calculator__setup {
