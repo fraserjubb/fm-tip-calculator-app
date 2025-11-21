@@ -110,16 +110,12 @@ svg {
 MAIN:
 ********************************
 */
-* {
-  /* border: solid hotpink 1px; */
-}
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  /* gap: 128px; */
 }
 
 .header {
@@ -129,19 +125,15 @@ MAIN:
 .header__logo {
 }
 
-.visually-hidden {
-}
-
 .calculator {
   display: flex;
   justify-content: space-between;
-  /* gap: var(--space-lg); */
   max-width: var(--calculator-width);
   width: 100%;
   height: var(--calculator-height);
   padding: var(--space-md) 40px;
-  border-radius: var(--radius-lg);
   background-color: white;
+  border-radius: var(--radius-lg);
 }
 
 .calculator__setup {
@@ -150,11 +142,9 @@ MAIN:
   justify-content: space-around;
   gap: 40px;
   width: 380px;
-  /* background-color: red; */
 }
 
 .calculator__setup-group {
-  /* width: 100%; */
 }
 
 .calculator__setup-title {
@@ -165,14 +155,14 @@ MAIN:
 .calculator__input {
   width: 100%;
   height: 48px;
+  color: var(--clr-green-900);
   background-color: var(--clr-grey-50);
   border: none;
   border-radius: var(--radius-sm);
 
   font-size: var(--fs-md);
 
-  color: var(--clr-green-900);
-
+  /* Input icon */
   background-image: url('/assets/images/icon-dollar.svg');
   background-repeat: no-repeat;
   background-position: left 18px center;
@@ -194,26 +184,24 @@ MAIN:
 .calculator__tip-buttons {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(3, 116px);
+  grid-template-columns: repeat(3, 1fr);
   list-style: none;
-  /* width: 380px; */
 }
 
 .calculator__tip-option {
-  width: 116px;
+  width: 100%;
   height: 48px;
+  font-size: var(--fs-md);
   border: none;
   border-radius: var(--radius-sm);
 
-  font-size: var(--fs-md);
-
-  background-color: var(--clr-green-900);
   color: white;
+  background-color: var(--clr-green-900);
 }
 
 .calculator__tip-option--selected {
-  background-color: var(--clr-green-400);
   color: var(--clr-green-900);
+  background-color: var(--clr-green-400);
 }
 
 .calculator__tip-option--custom {
@@ -224,8 +212,8 @@ MAIN:
 .calculator__summary {
   width: 413px;
   padding: 36px 32px;
-  border-radius: var(--radius-md);
   background-color: var(--clr-green-900);
+  border-radius: var(--radius-md);
 }
 
 .calculator__summary-content {
@@ -262,8 +250,8 @@ MAIN:
   border: none;
   border-radius: var(--radius-sm);
 
-  text-transform: uppercase;
   font-size: var(--fs-sm);
+  text-transform: uppercase;
   color: var(--clr-green-900);
   background-color: var(--clr-green-400);
 }
@@ -274,9 +262,7 @@ FOOTER:
 ********************************
 */
 .attribution {
-  /* position: absolute; */
   bottom: 0;
-  /* margin-top: 32px; */
   text-align: center;
   margin-bottom: var(--space-xl);
 
