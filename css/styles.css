@@ -119,6 +119,7 @@ MAIN:
   align-items: center;
   justify-content: center;
   height: 100vh;
+  /* gap: 128px; */
 }
 
 .header {
@@ -222,7 +223,7 @@ MAIN:
 
 .calculator__summary {
   width: 413px;
-  padding: 32px;
+  padding: 36px 32px;
   border-radius: var(--radius-md);
   background-color: var(--clr-green-900);
 }
@@ -273,6 +274,9 @@ FOOTER:
 ********************************
 */
 .attribution {
+  /* position: absolute; */
+  bottom: 0;
+  /* margin-top: 32px; */
   text-align: center;
   margin-bottom: var(--space-xl);
 
