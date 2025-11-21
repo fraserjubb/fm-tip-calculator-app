@@ -28,14 +28,20 @@
   /* Containers & Dimensions */
   --calculator-width: 57.5rem; /* 920px */
   --calculator-height: 30rem; /* 480px */
+  --calculator-setup-width: 23.75rem; /* 380px */
+  --calculator-summary-width: 25.75rem; /* 412px */
+  --control-height: 3rem; /* 48px */
 
   /* Spacing scale (rem) */
   --space-2xs: 0.5rem; /* 8px */
   --space-xs: 1rem; /* 16px */
+  --space-xs-2: 1.125rem; /* 18px */
   --space-sm: 1.5rem; /* 24px */
   --space-md: 2rem; /* 32px */
+  --space-md-2: 2.5rem; /* 40px */
   --space-lg: 3rem; /* 48px */
   --space-xl: 5rem; /* 80px */
+  --space-xl-2: 5.5rem; /* 88px */
   --space-2xl: 6rem; /* 96px */
   --space-3xl: 7.5rem; /* 120px */
   --space-4xl: 8rem; /* 128px */
@@ -119,7 +125,7 @@ MAIN:
 }
 
 .header {
-  margin-bottom: 87.86px;
+  margin-bottom: var(--space-xl-2);
 }
 
 .header__logo {
@@ -131,7 +137,7 @@ MAIN:
   max-width: var(--calculator-width);
   width: 100%;
   height: var(--calculator-height);
-  padding: var(--space-md) 40px;
+  padding: var(--space-md) var(--space-md-2);
   background-color: white;
   border-radius: var(--radius-lg);
 
@@ -142,8 +148,8 @@ MAIN:
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  gap: 40px;
-  width: 380px;
+  gap: var(--space-md-2);
+  width: var(--calculator-setup-width);
 }
 
 .calculator__setup-group {
@@ -151,12 +157,12 @@ MAIN:
 
 .calculator__setup-title {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2xs);
 }
 
 .calculator__input {
   width: 100%;
-  height: 48px;
+  height: var(--control-height);
   color: var(--clr-green-900);
   background-color: var(--clr-grey-50);
   border: none;
@@ -166,9 +172,9 @@ MAIN:
 
   /* Input icons positioning */
   background-repeat: no-repeat;
-  background-position: left 18px center;
+  background-position: left var(--space-xs-2) center;
   text-align: right;
-  padding-right: 18px;
+  padding-right: var(--space-xs-2);
 
   /* Remove the input arrows */
   /* Firefox */
@@ -193,14 +199,14 @@ MAIN:
 
 .calculator__tip-buttons {
   display: grid;
-  gap: 16px;
+  gap: var(--space-xs);
   grid-template-columns: repeat(3, 1fr);
   list-style: none;
 }
 
 .calculator__tip-option {
   width: 100%;
-  height: 48px;
+  height: var(--control-height);
   font-size: var(--fs-md);
   border: none;
   border-radius: var(--radius-sm);
@@ -220,8 +226,8 @@ MAIN:
 }
 
 .calculator__summary {
-  width: 413px;
-  padding: 36px 32px;
+  width: var(--calculator-summary-width);
+  padding: 2.25rem var(--space-md); /* 36px 32px */
   background-color: var(--clr-green-900);
   border-radius: var(--radius-md);
 }
@@ -230,9 +236,8 @@ MAIN:
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  gap: 24px;
-  height: 166px;
-  margin-bottom: 128px;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-4xl);
 }
 
 .calculator__summary-item {
@@ -256,7 +261,7 @@ MAIN:
 
 .calculator__reset {
   width: 100%;
-  height: 48px;
+  height: var(--control-height);
   border: none;
   border-radius: var(--radius-sm);
 
