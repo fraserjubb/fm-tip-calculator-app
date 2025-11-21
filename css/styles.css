@@ -190,11 +190,6 @@ MAIN:
   margin: 0;
 }
 
-/* Firefox */
-input[type='number'] {
-  -moz-appearance: textfield;
-}
-
 .calculator__tip-buttons {
   display: grid;
   gap: 16px;
@@ -318,11 +313,4 @@ UTILITY CLASSES:
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-input[type='number'] {
-  -moz-appearance: textfield; /* Firefox */
-  -webkit-appearance: none; /* Chrome, Safari, Edge */
-  appearance: none; /* Standard */
-  margin: 0; /* Remove default spacing for webkit */
 }
