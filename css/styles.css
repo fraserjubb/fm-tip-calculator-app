@@ -209,7 +209,7 @@ Calculator Inputs & Buttons:
   background-image: url('/assets/images/icon-person.svg');
 }
 
-/* Buttons */
+/* Tip Buttons */
 .calculator__tip-buttons {
   display: grid;
   gap: var(--space-xs);
@@ -328,6 +328,19 @@ FOOTER:
 
 /* 
 ********************************
+SHARED HOVER STATES:
+********************************
+*/
+.calculator__tip-option:hover,
+.calculator__reset:hover {
+  cursor: pointer;
+  color: var(--clr-green-900);
+  background-color: var(--clr-green-200);
+  transition: 0.3s;
+}
+
+/* 
+********************************
 UTILITY CLASSES:
 ********************************
 */
@@ -342,7 +355,3 @@ UTILITY CLASSES:
   white-space: nowrap;
   border: 0;
 }
-
-/* fieldset {
-  border: none;
-} */
