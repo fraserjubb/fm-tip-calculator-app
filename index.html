@@ -16,13 +16,13 @@
     <div class="wrapper">
       <header class="header">
         <img src="assets/images/logo.svg" alt="Company logo" class="header__logo" />
-        <h1 class="visually-hidden">Tip Calculator</h1>
       </header>
       <main class="calculator">
+        <h1 class="visually-hidden">Tip Calculator</h1>
         <section class="calculator__setup">
           <div class="calculator__setup-group">
             <label class="calculator__setup-title" for="bill-input">Bill</label>
-            <input id="bill-input" type="number" min="0" step="0.01" class="calculator__input" />
+            <input id="bill-input" type="number" min="0" step="0.01" class="calculator__input" placeholder="0" />
           </div>
           <fieldset class="calculator__setup-group">
             <legend class="calculator__setup-title">Select Tip %</legend>
@@ -55,7 +55,7 @@
           </fieldset>
           <div class="calculator__setup-group">
             <label class="calculator__setup-title" for="people-input">Number of People</label>
-            <input id="people-input" type="number" min="0" class="calculator__input" />
+            <input id="people-input" type="number" min="0" class="calculator__input" placeholder="1" />
           </div>
         </section>
         <section class="calculator__summary">
