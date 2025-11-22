@@ -44,4 +44,45 @@ MOBILE:
 ********************************
 */
 @media (max-width: 640px) {
+  :root {
+    /* Containers & Dimensions */
+    --calculator-width: 100%;
+    --calculator-height: 789px; /* 789px */
+    --calculator-setup-width: 327px; /* 327px */
+    --calculator-summary-width: 327px; /* 327px */
+  }
+  .header__logo {
+    margin-top: 50px;
+  }
+
+  .calculator {
+    padding: 32px 24px;
+  }
+
+  .calculator__setup {
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .calculator__tip-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calculator__summary {
+    height: 257px;
+    padding: var(--space-sm);
+  }
+
+  .calculator__summary-content {
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .calculator__summary-value {
+    font-size: var(--fs-lg);
+  }
+
+  .attribution {
+    margin: var(--space-xs) var(--space-md);
+  }
 }
