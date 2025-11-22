@@ -200,6 +200,18 @@ Calculator Inputs & Buttons:
   margin: 0;
 }
 
+.calculator__input::placeholder {
+  opacity: 0.35;
+}
+
+.calculator__input:hover {
+  cursor: pointer;
+}
+
+.calculator__input:focus {
+  outline: 2px solid var(--clr-green-400);
+}
+
 /* Input icons */
 #bill-input {
   background-image: url('/assets/images/icon-dollar.svg');
