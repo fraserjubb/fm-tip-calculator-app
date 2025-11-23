@@ -2,6 +2,7 @@ const bill = document.querySelector('#bill-input');
 const people = document.querySelector('#people-input');
 
 const selectedTip = Array.from(document.querySelectorAll('.calculator__tip-amount'));
+const tipButtons = Array.from(document.querySelectorAll('.calculator__tip-option'));
 
 const tipAmount = document.querySelector('#calculator__tip-amount');
 const totalString = document.querySelector('#total');
@@ -37,12 +38,29 @@ function updateTipAmount() {
 // }
 
 let myTip = 0;
-selectedTip.forEach(tip => {
-  tip.addEventListener('change', () => {
-    myTip = tip.value;
-    updateTipAmount();
+let tipSelected = false;
+
+function handleSelectedBtn(e) {
+  const button = e.nextElementSibling;
+  console.log(button.classList);
+  console.log(e.checked);
+  button.classList.toggle('calculator__tip-option--selected', e.checked);
+  // if (e.checked) {
+  // }
+  // button.classList.remove('calculator__tip-option--selected');
+}
+
+function handTips(e) {
+  selectedTip.forEach(tip => {
+    const button = tip.nextElementSibling;
+    button.classList.toggle('calculator__tip-option--selected', tip.checked);
   });
-});
+  myTip = e.currentTarget.value;
+
+  updateTipAmount();
+}
+
+selectedTip.forEach(tip => tip.addEventListener('change', e => handTips(e)));
 
 people.addEventListener('change', updateTipAmount);
 bill.addEventListener('change', updateTipAmount);
