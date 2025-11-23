@@ -28,27 +28,27 @@
             <legend class="calculator__setup-title">Select Tip %</legend>
             <div class="calculator__tip-buttons">
               <div>
-                <input type="radio" id="five" name="drone" value="0.05" class="visually-hidden" />
+                <input type="radio" id="five" name="tip" value="0.05" class="calculator__tip-amount visually-hidden" />
                 <label class="calculator__tip-option" for="five">5%</label>
               </div>
               <div>
-                <input type="radio" id="ten" name="drone" value="0.1" class="visually-hidden" />
+                <input type="radio" id="ten" name="tip" value="0.1" class="calculator__tip-amount visually-hidden" />
                 <label class="calculator__tip-option" for="ten">10%</label>
               </div>
               <div>
-                <input type="radio" id="fifteen" name="drone" value="0.15" class="visually-hidden" />
+                <input type="radio" id="fifteen" name="tip" value="0.15" class="calculator__tip-amount visually-hidden" />
                 <label class="calculator__tip-option calculator__tip-option--selected" for="fifteen">15%</label>
               </div>
               <div>
-                <input type="radio" id="twentyfive" name="drone" value="0.25" class="visually-hidden" />
+                <input type="radio" id="twentyfive" name="tip" value="0.25" class="calculator__tip-amount visually-hidden" />
                 <label class="calculator__tip-option" for="twentyfive">25%</label>
               </div>
               <div>
-                <input type="radio" id="fifty" name="drone" value="0.5" class="visually-hidden" />
+                <input type="radio" id="fifty" name="tip" value="0.5" class="calculator__tip-amount visually-hidden" />
                 <label class="calculator__tip-option" for="fifty">50%</label>
               </div>
               <div>
-                <input type="radio" id="custom" name="drone" value="custom" class="visually-hidden" />
+                <input type="radio" id="custom" name="tip" value="custom" class="calculator__tip-amount visually-hidden" />
                 <label class="calculator__tip-option calculator__tip-option--custom" for="custom">Custom</label>
               </div>
             </div>
@@ -62,11 +62,11 @@
           <div class="calculator__summary-content">
             <div class="calculator__summary-item">
               <p class="calculator__summary-title">Tip Amount<span class="calculator__summary-title--sub">/ person</span></p>
-              <p class="calculator__summary-value">$0.00</p>
+              <p id="calculator__tip-amount" class="calculator__summary-value">$0.00</p>
             </div>
             <div class="calculator__summary-item">
               <p class="calculator__summary-title">Total<span class="calculator__summary-title--sub">/ person</span></p>
-              <p class="calculator__summary-value">$0.00</p>
+              <p id="total" class="calculator__summary-value">$0.00</p>
             </div>
           </div>
           <button type="button" class="calculator__reset">Reset</button>
