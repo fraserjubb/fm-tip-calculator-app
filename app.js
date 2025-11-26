@@ -5,9 +5,7 @@ const selectedTip = Array.from(document.querySelectorAll('.calculator__tip-amoun
 const tipLabels = Array.from(document.querySelectorAll('.calculator__tip-option'));
 
 const tipDisplay = document.querySelector('#calculator__tip-amount');
-const totalString = document.querySelector('#total');
-
-const total = Number(totalString.innerText.slice(1));
+const totalDisplay = document.querySelector('#total');
 
 let tipPercent;
 
@@ -15,8 +13,10 @@ function updateTipAmount() {
   const people = Number(peopleInput.value);
   const bill = Number(billInput.value);
   const tip = people > 0 && bill > 0 && tipPercent > 0 ? (bill * tipPercent) / people : 0;
+  const total = tip * people + bill;
 
   tipDisplay.textContent = `$${tip.toFixed(2)}`;
+  totalDisplay.textContent = `$${total.toFixed(2)}`;
 }
 
 function getTip(e) {
