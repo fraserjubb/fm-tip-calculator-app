@@ -9,23 +9,13 @@ const totalString = document.querySelector('#total');
 
 const total = Number(totalString.innerText.slice(1));
 
-let people;
-let bill;
-let tip;
-let tipPercent = 0;
-
-function getInputs() {
-  people = Number(peopleInput.value);
-  bill = Number(billInput.value);
-}
+let tipPercent;
 
 function updateTipAmount() {
-  getInputs();
-  if (people === 0 || bill === 0 || tipPercent === 0) {
-    tip = 0;
-  } else {
-    tip = (bill * tipPercent) / people;
-  }
+  const people = Number(peopleInput.value);
+  const bill = Number(billInput.value);
+  const tip = people > 0 && bill > 0 && tipPercent > 0 ? (bill * tipPercent) / people : 0;
+
   tipDisplay.textContent = `$${tip.toFixed(2)}`;
 }
 
@@ -34,12 +24,12 @@ function getTip(e) {
     const tipValue = tip.nextElementSibling;
     tipValue.classList.toggle('calculator__tip-option--selected', tip.checked);
   });
-  tipPercent = e.currentTarget.value;
+  tipPercent = Number(e.currentTarget.value);
 
   updateTipAmount();
 }
 
-selectedTip.forEach(tip => tip.addEventListener('change', e => getTip(e)));
+selectedTip.forEach(tip => tip.addEventListener('change', getTip));
 
 peopleInput.addEventListener('change', updateTipAmount);
 billInput.addEventListener('change', updateTipAmount);
