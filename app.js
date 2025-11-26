@@ -2,12 +2,11 @@ const billInput = document.querySelector('#bill-input');
 const peopleInput = document.querySelector('#people-input');
 
 const selectedTip = Array.from(document.querySelectorAll('.calculator__tip-amount'));
-const tipLabels = Array.from(document.querySelectorAll('.calculator__tip-option'));
 
 const tipDisplay = document.querySelector('#calculator__tip-amount');
 const totalDisplay = document.querySelector('#total');
 
-let tipPercent;
+let tipPercent = 0;
 
 function updateTipAmount() {
   const people = Number(peopleInput.value);
