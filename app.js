@@ -8,6 +8,28 @@ const totalDisplay = document.querySelector('#total');
 
 let tipPercent = 0;
 
+function handleBillInput() {
+  let bill = billInput.value;
+
+  // Remove invalid characters (anything that's not digit or dot)
+  bill = bill.replace(/[^0-9.]/g, '');
+
+  // Allow only one decimal point
+  const parts = bill.split('.');
+  console.log(parts);
+  if (parts.length > 2) {
+    bill = parts[0] + '.' + parts.slice(1).join('');
+  }
+
+  // Limit to two decimal places
+  if (parts[1]) {
+    parts[1] = parts[1].slice(0, 2);
+    bill = parts[0] + '.' + parts[1];
+  }
+
+  billInput.value = bill;
+}
+
 function updateTipAmount() {
   const people = Number(peopleInput.value);
   const bill = Number(billInput.value);
@@ -28,7 +50,8 @@ function getTip(e) {
   updateTipAmount();
 }
 
-selectedTip.forEach(tip => tip.addEventListener('change', getTip));
+billInput.addEventListener('input', handleBillInput);
 
-peopleInput.addEventListener('change', updateTipAmount);
 billInput.addEventListener('change', updateTipAmount);
+selectedTip.forEach(tip => tip.addEventListener('change', getTip));
+peopleInput.addEventListener('change', updateTipAmount);
