@@ -27,6 +27,13 @@ function handleBillInput() {
     bill = parts[0] + '.' + parts[1];
   }
 
+  // Expand limit if bill is a higher value
+  if (parts[0].length >= 4 && bill.includes('.')) {
+    billInput.maxLength = parts[0].length + 3;
+  } else {
+    billInput.maxLength = 6;
+  }
+
   billInput.value = bill;
 }
 
