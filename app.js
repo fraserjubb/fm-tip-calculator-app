@@ -6,6 +6,8 @@ const selectedTip = Array.from(document.querySelectorAll('.calculator__tip-amoun
 const tipDisplay = document.querySelector('#calculator__tip-amount');
 const totalDisplay = document.querySelector('#total');
 
+const resetBtn = document.querySelector('.calculator__reset');
+
 let tipPercent = 0;
 
 function handleUserInput() {
@@ -66,3 +68,16 @@ function getTip(e) {
 billInput.addEventListener('change', updateTipAmount);
 selectedTip.forEach(tip => tip.addEventListener('change', getTip));
 peopleInput.addEventListener('change', updateTipAmount);
+
+resetBtn.addEventListener('click', () => {
+  billInput.value = '';
+  peopleInput.value = '';
+  tipPercent = 0;
+
+  selectedTip.forEach(tip => {
+    const tipValue = tip.nextElementSibling;
+    tipValue.classList.remove('calculator__tip-option--selected');
+    tip.checked = false;
+  });
+  updateTipAmount();
+});
