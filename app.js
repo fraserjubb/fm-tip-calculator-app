@@ -1,7 +1,7 @@
 const billInput = document.querySelector('#bill-input');
 const peopleInput = document.querySelector('#people-input');
 
-const selectedTip = Array.from(document.querySelectorAll('.calculator__tip-amount'));
+const tipInputs = Array.from(document.querySelectorAll('.calculator__tip-input'));
 
 const tipDisplay = document.querySelector('#calculator__tip-amount');
 const totalDisplay = document.querySelector('#total');
@@ -54,9 +54,9 @@ function updateTipAmount() {
 }
 
 function getTip(e) {
-  selectedTip.forEach(tip => {
+  tipInputs.forEach(tip => {
     const tipValue = tip.nextElementSibling;
-    tipValue.classList.toggle('calculator__tip-option--selected', tip.checked);
+    tipValue.classList.toggle('calculator__tip-label--selected', tip.checked);
   });
   tipPercent = Number(e.currentTarget.value);
 
@@ -66,7 +66,7 @@ function getTip(e) {
 [billInput, peopleInput].forEach(input => input.addEventListener('input', handleUserInput));
 
 billInput.addEventListener('change', updateTipAmount);
-selectedTip.forEach(tip => tip.addEventListener('change', getTip));
+tipInputs.forEach(tip => tip.addEventListener('change', getTip));
 peopleInput.addEventListener('change', updateTipAmount);
 
 resetBtn.addEventListener('click', () => {
@@ -74,9 +74,9 @@ resetBtn.addEventListener('click', () => {
   peopleInput.value = '';
   tipPercent = 0;
 
-  selectedTip.forEach(tip => {
+  tipInputs.forEach(tip => {
     const tipValue = tip.nextElementSibling;
-    tipValue.classList.remove('calculator__tip-option--selected');
+    tipValue.classList.remove('calculator__tip-label--selected');
     tip.checked = false;
   });
   updateTipAmount();

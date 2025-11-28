@@ -222,14 +222,14 @@ Calculator Inputs & Buttons:
 }
 
 /* Tip Buttons */
-.calculator__tip-buttons {
+.calculator__tip-inputs-grid {
   display: grid;
   gap: var(--space-xs);
   grid-template-columns: repeat(3, 1fr);
   list-style: none;
 }
 
-.calculator__tip-option {
+.calculator__tip-label {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -243,12 +243,12 @@ Calculator Inputs & Buttons:
   background-color: var(--clr-green-900);
 }
 
-.calculator__tip-option--selected {
+.calculator__tip-label--selected {
   color: var(--clr-green-900);
   background-color: var(--clr-green-400);
 }
 
-.calculator__tip-option--custom {
+.calculator__tip-label--custom {
   color: var(--clr-grey-550);
   background-color: var(--clr-grey-50);
 }
@@ -344,7 +344,7 @@ FOOTER:
 SHARED HOVER STATES:
 ********************************
 */
-.calculator__tip-option:hover,
+.calculator__tip-label:hover,
 .calculator__reset:hover {
   cursor: pointer;
   color: var(--clr-green-900);
