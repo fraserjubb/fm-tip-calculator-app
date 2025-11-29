@@ -249,9 +249,10 @@ Calculator Inputs & Buttons:
 }
 
 .calculator__input--custom-container {
+  position: relative;
+  border-radius: var(--radius-sm);
   color: var(--clr-grey-550);
   background-color: var(--clr-grey-50);
-  position: relative;
 }
 
 .calculator__input--custom {
@@ -259,13 +260,13 @@ Calculator Inputs & Buttons:
   text-align: center;
 }
 
-#percent {
+.calculator__input--custom-container span {
+  display: none;
   position: absolute;
   right: 1.3rem;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none; /* user can't click it */
-  color: var(--clr-grey-550);
   font-size: var(--fs-md);
 }
 

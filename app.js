@@ -4,6 +4,7 @@ const peopleInput = document.querySelector('#people-input');
 const tipInputs = Array.from(document.querySelectorAll('.calculator__tip-input'));
 
 const customTipInput = document.querySelector('.calculator__input--custom');
+const percentSymbol = document.querySelector('.calculator__input--custom-container span ');
 
 const tipDisplay = document.querySelector('#calculator__tip-amount');
 const totalDisplay = document.querySelector('#total');
@@ -83,7 +84,7 @@ function getCustomTip() {
 
   customTip = Number(customTipInput.value) / 100;
   customTipInput.classList.add('calculator__tip-label--selected');
-
+  percentSymbol.style.display = 'block';
   updateTipAmount();
 }
 
@@ -91,6 +92,7 @@ function deselectCustomTip() {
   customTip = 0;
   customTipInput.value = '';
   customTipInput.classList.remove('calculator__tip-label--selected');
+  percentSymbol.style.display = 'none';
 }
 
 function deselectDefaultTip() {
