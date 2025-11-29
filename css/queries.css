@@ -64,7 +64,7 @@ MOBILE:
     margin-bottom: var(--space-md);
   }
 
-  .calculator__tip-buttons {
+  .calculator__tip-inputs-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
