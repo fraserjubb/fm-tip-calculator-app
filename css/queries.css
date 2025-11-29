@@ -43,7 +43,7 @@ TABLET:
 MOBILE:
 ********************************
 */
-@media (max-width: 640px) {
+@media (max-width: 500px) {
   :root {
     /* Containers & Dimensions */
     --calculator-width: 100%;
