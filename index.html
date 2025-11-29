@@ -47,9 +47,9 @@
                 <input type="radio" id="fifty" name="tip" value="0.5" class="calculator__tip-input visually-hidden" />
                 <label class="calculator__tip-label" for="fifty">50%</label>
               </div>
-              <div>
-                <input type="radio" id="custom" name="tip" value="custom" class="calculator__tip-input visually-hidden" />
-                <label class="calculator__tip-label calculator__tip-label--custom" for="custom">Custom</label>
+              <div class="calculator__input--custom-container">
+                <input class="calculator__input calculator__input--custom" type="text" inputmode="decimal" maxlength="3" placeholder="Custom" />
+                <span id="percent">%</span>
               </div>
             </div>
           </fieldset>

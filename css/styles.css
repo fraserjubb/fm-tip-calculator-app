@@ -248,9 +248,25 @@ Calculator Inputs & Buttons:
   background-color: var(--clr-green-400);
 }
 
-.calculator__tip-label--custom {
+.calculator__input--custom-container {
   color: var(--clr-grey-550);
   background-color: var(--clr-grey-50);
+  position: relative;
+}
+
+.calculator__input--custom {
+  padding-right: 0;
+  text-align: center;
+}
+
+#percent {
+  position: absolute;
+  right: 1.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* user can't click it */
+  color: var(--clr-grey-550);
+  font-size: var(--fs-md);
 }
 
 /* 

@@ -3,22 +3,27 @@ const peopleInput = document.querySelector('#people-input');
 
 const tipInputs = Array.from(document.querySelectorAll('.calculator__tip-input'));
 
+const customTipInput = document.querySelector('.calculator__input--custom');
+
 const tipDisplay = document.querySelector('#calculator__tip-amount');
 const totalDisplay = document.querySelector('#total');
 
 const resetBtn = document.querySelector('.calculator__reset');
 
 let tipPercent = 0;
+let customTip = 0;
 
 function handleUserInput() {
   let bill = billInput.value;
   let people = peopleInput.value;
+  let customTip = customTipInput.value;
 
   // Remove invalid characters (anything that's not digit or dot)
   bill = bill.replace(/[^0-9.]/g, '');
 
   // Remove invalid characters (anything that's not digit)
   people = people.replace(/[^0-9]/g, '');
+  customTip = customTip.replace(/[^0-9]/g, '');
 
   // Allow only one decimal point
   const parts = bill.split('.');
@@ -41,12 +46,21 @@ function handleUserInput() {
 
   billInput.value = bill;
   peopleInput.value = people;
+  customTipInput.value = customTip;
 }
 
 function updateTipAmount() {
   const people = Number(peopleInput.value);
   const bill = Number(billInput.value);
-  const tip = people > 0 && bill > 0 && tipPercent > 0 ? (bill * tipPercent) / people : 0;
+
+  let tipInputActive = 0;
+  if (tipPercent > 0) {
+    tipInputActive = tipPercent;
+  } else if (customTip > 0) {
+    tipInputActive = customTip;
+  }
+
+  const tip = people > 0 && bill > 0 && tipInputActive > 0 ? (bill * tipInputActive) / people : 0;
   const total = tip * people + bill;
 
   tipDisplay.textContent = `$${tip.toFixed(2)}`;
@@ -54,6 +68,7 @@ function updateTipAmount() {
 }
 
 function getTip(e) {
+  deselectCustomTip();
   tipInputs.forEach(tip => {
     const tipValue = tip.nextElementSibling;
     tipValue.classList.toggle('calculator__tip-label--selected', tip.checked);
@@ -63,21 +78,42 @@ function getTip(e) {
   updateTipAmount();
 }
 
-[billInput, peopleInput].forEach(input => input.addEventListener('input', handleUserInput));
+function getCustomTip() {
+  deselectDefaultTip();
 
-billInput.addEventListener('change', updateTipAmount);
-tipInputs.forEach(tip => tip.addEventListener('change', getTip));
-peopleInput.addEventListener('change', updateTipAmount);
+  customTip = Number(customTipInput.value) / 100;
+  customTipInput.classList.add('calculator__tip-label--selected');
 
-resetBtn.addEventListener('click', () => {
-  billInput.value = '';
-  peopleInput.value = '';
+  updateTipAmount();
+}
+
+function deselectCustomTip() {
+  customTip = 0;
+  customTipInput.value = '';
+  customTipInput.classList.remove('calculator__tip-label--selected');
+}
+
+function deselectDefaultTip() {
   tipPercent = 0;
-
   tipInputs.forEach(tip => {
     const tipValue = tip.nextElementSibling;
     tipValue.classList.remove('calculator__tip-label--selected');
     tip.checked = false;
   });
+}
+
+[billInput, peopleInput, customTipInput].forEach(input => input.addEventListener('input', handleUserInput));
+
+billInput.addEventListener('change', updateTipAmount);
+tipInputs.forEach(tip => tip.addEventListener('change', getTip));
+peopleInput.addEventListener('change', updateTipAmount);
+customTipInput.addEventListener('change', getCustomTip);
+
+resetBtn.addEventListener('click', () => {
+  billInput.value = '';
+  peopleInput.value = '';
+
+  deselectCustomTip();
+  deselectDefaultTip();
   updateTipAmount();
 });
