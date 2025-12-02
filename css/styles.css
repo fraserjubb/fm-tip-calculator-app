@@ -212,6 +212,11 @@ Calculator Inputs & Buttons:
   outline: 2px solid var(--clr-green-400);
 }
 
+/* Input error state */
+.calculator__input--error {
+  outline: 2px solid var(--clr-orange-400);
+}
+
 /* Input icons */
 #bill-input {
   background-image: url('/assets/images/icon-dollar.svg');
@@ -286,6 +291,15 @@ Calculator Inputs & Buttons:
   font-size: var(--fs-md);
 }
 
+/* People Input */
+.calculator__people-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calculator__people--error {
+  color: var(--clr-orange-400);
+}
 /* 
 ******
 Calculator Summary:
@@ -391,6 +405,10 @@ SHARED HOVER STATES:
 UTILITY CLASSES:
 ********************************
 */
+.hidden {
+  display: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

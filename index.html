@@ -54,7 +54,10 @@
             </div>
           </fieldset>
           <div class="calculator__setup-group">
-            <label class="calculator__setup-title" for="people-input">Number of People</label>
+            <div class="calculator__people-title-container">
+              <label class="calculator__setup-title" for="people-input">Number of People</label>
+              <p class="calculator__people--error hidden">Can't be zero</p>
+            </div>
             <input id="people-input" class="calculator__input" type="text" inputmode="numeric" maxlength="3" placeholder="0" />
           </div>
         </section>

@@ -9,6 +9,8 @@ const percentSymbol = document.querySelector('.calculator__input--custom-contain
 const tipDisplay = document.querySelector('#calculator__tip-amount');
 const totalDisplay = document.querySelector('#total');
 
+const peopleErrorMessage = document.querySelector('.calculator__people--error');
+
 const resetBtn = document.querySelector('.calculator__reset');
 
 let tipPercent = 0;
@@ -50,6 +52,13 @@ function handleUserInput() {
   customTipInput.value = customTip;
 }
 
+function checkPeopleValue() {
+  const people = Number(peopleInput.value);
+
+  peopleErrorMessage.classList.toggle('hidden', people !== 0);
+  peopleInput.classList.toggle('calculator__input--error', people === 0);
+}
+
 function updateTipAmount() {
   const people = Number(peopleInput.value);
   const bill = Number(billInput.value);
@@ -61,8 +70,10 @@ function updateTipAmount() {
     tipInputActive = customTip;
   }
 
-  const tip = people > 0 && bill > 0 && tipInputActive > 0 ? (bill * tipInputActive) / people : 0;
-  const total = tip * people + bill;
+  const inputsComplete = people > 0 && bill > 0 && tipInputActive > 0;
+
+  const tip = inputsComplete ? (bill * tipInputActive) / people : 0;
+  const total = inputsComplete ? tip * people + bill : 0;
 
   tipDisplay.textContent = `$${tip.toFixed(2)}`;
   totalDisplay.textContent = `$${total.toFixed(2)}`;
@@ -84,7 +95,6 @@ function getCustomTip() {
 
   customTip = Number(customTipInput.value) / 100;
   customTipInput.classList.add('calculator__tip-label--selected');
-  // percentSymbol.style.display = 'block';
   updateTipAmount();
 }
 
@@ -109,11 +119,14 @@ function deselectDefaultTip() {
 billInput.addEventListener('change', updateTipAmount);
 tipInputs.forEach(tip => tip.addEventListener('change', getTip));
 peopleInput.addEventListener('change', updateTipAmount);
+peopleInput.addEventListener('change', checkPeopleValue);
 customTipInput.addEventListener('change', getCustomTip);
 
 resetBtn.addEventListener('click', () => {
   billInput.value = '';
   peopleInput.value = '';
+  peopleErrorMessage.classList.add('hidden');
+  peopleInput.classList.remove('calculator__input--error');
 
   deselectCustomTip();
   deselectDefaultTip();
