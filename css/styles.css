@@ -248,6 +248,7 @@ Calculator Inputs & Buttons:
   background-color: var(--clr-green-400);
 }
 
+/* Custom Tip Input */
 .calculator__input--custom-container {
   position: relative;
   border-radius: var(--radius-sm);
@@ -260,6 +261,21 @@ Calculator Inputs & Buttons:
   text-align: center;
 }
 
+.calculator__input--custom:focus {
+  color: var(--clr-green-900);
+  background-color: var(--clr-green-200);
+}
+
+.calculator__input--custom:focus::placeholder {
+  color: transparent;
+}
+
+.calculator__input--custom::placeholder {
+  opacity: 1;
+  color: var(--clr-grey-550);
+}
+
+/* Percentage symbol in custom tip input */
 .calculator__input--custom-container span {
   display: none;
   position: absolute;
@@ -362,7 +378,8 @@ SHARED HOVER STATES:
 ********************************
 */
 .calculator__tip-label:hover,
-.calculator__reset:hover {
+.calculator__reset:hover,
+.calculator__input--custom:hover {
   cursor: pointer;
   color: var(--clr-green-900);
   background-color: var(--clr-green-200);
