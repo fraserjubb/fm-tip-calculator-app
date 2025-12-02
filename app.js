@@ -84,7 +84,7 @@ function getCustomTip() {
 
   customTip = Number(customTipInput.value) / 100;
   customTipInput.classList.add('calculator__tip-label--selected');
-  percentSymbol.style.display = 'block';
+  // percentSymbol.style.display = 'block';
   updateTipAmount();
 }
 
@@ -118,4 +118,32 @@ resetBtn.addEventListener('click', () => {
   deselectCustomTip();
   deselectDefaultTip();
   updateTipAmount();
+});
+
+// Input style when being used
+customTipInput.addEventListener('focus', () => {
+  deselectDefaultTip();
+  percentSymbol.style.display = 'block';
+  percentSymbol.style.color = 'var(--clr-grey-550)';
+  customTipInput.style.color = 'var(--clr-grey-550)';
+});
+
+// Input style changes when clicked out of element.
+customTipInput.addEventListener('blur', () => {
+  if (customTipInput.value === '') {
+    percentSymbol.style.display = 'none';
+  }
+  if (customTipInput.value.length >= 1) {
+    customTipInput.style.color = 'var(--clr-green-900)';
+    percentSymbol.style.color = 'var(--clr-green-900)';
+  }
+});
+
+// Dynamic Percent Symbol distance
+customTipInput.addEventListener('input', () => {
+  if (customTipInput.value.length === 1) {
+    percentSymbol.style.right = '2.25rem';
+  } else if (customTipInput.value.length === 2) {
+    percentSymbol.style.right = '1.75rem';
+  }
 });
