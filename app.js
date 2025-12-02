@@ -52,6 +52,12 @@ function handleUserInput() {
   customTipInput.value = customTip;
 }
 
+function removeFocus(e) {
+  if (e.key === 'Enter') {
+    e.target.blur();
+  }
+}
+
 function checkPeopleValue() {
   const people = Number(peopleInput.value);
 
@@ -114,7 +120,10 @@ function deselectDefaultTip() {
   });
 }
 
-[billInput, peopleInput, customTipInput].forEach(input => input.addEventListener('input', handleUserInput));
+[billInput, peopleInput, customTipInput].forEach(input => {
+  input.addEventListener('input', handleUserInput);
+  input.addEventListener('keydown', removeFocus);
+});
 
 billInput.addEventListener('change', updateTipAmount);
 tipInputs.forEach(tip => tip.addEventListener('change', getTip));
