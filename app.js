@@ -9,7 +9,7 @@ const peopleInput = document.querySelector('#people-input');
 const tipInputs = Array.from(document.querySelectorAll('.calculator__tip-input'));
 
 const customTipInput = document.querySelector('.calculator__input--custom');
-const percentSymbol = document.querySelector('.calculator__input--custom-container span ');
+const percentSymbol = document.querySelector('.calculator__input--custom-container span');
 
 const tipDisplay = document.querySelector('#calculator__tip-amount');
 const totalDisplay = document.querySelector('#total');
@@ -74,15 +74,18 @@ function handleUserInput() {
 }
 
 function handlePeopleValue() {
-  const people = Number(peopleInput.value);
+  const peopleRaw = peopleInput.value;
 
-  peopleErrorMessage.classList.toggle('hidden', people !== 0);
-  peopleInput.classList.toggle('calculator__input--error', people === 0);
+  peopleErrorMessage.classList.toggle('hidden', peopleRaw !== '0');
+  peopleInput.classList.toggle('calculator__input--error', peopleRaw === '0');
 }
 
 function updateTipAmount() {
-  const people = Number(peopleInput.value);
-  const bill = Number(billInput.value);
+  const peopleRaw = peopleInput.value;
+  const billRaw = billInput.value;
+
+  const people = Number(peopleRaw);
+  const bill = Number(billRaw);
 
   let tipInputActive = 0;
   if (tipPercent > 0) {
@@ -91,7 +94,7 @@ function updateTipAmount() {
     tipInputActive = customTip;
   }
 
-  const anyInput = people > 0 || bill > 0 || tipInputActive > 0;
+  const anyInput = peopleRaw !== '' || billRaw !== '' || tipInputActive > 0;
   resetBtn.classList.toggle('calculator__reset--active', anyInput);
 
   const inputsComplete = people > 0 && bill > 0 && tipInputActive > 0;
