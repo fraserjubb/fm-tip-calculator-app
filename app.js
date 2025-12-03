@@ -1,3 +1,8 @@
+/* 
+********************************
+DOM SELECTORS:
+********************************
+*/
 const billInput = document.querySelector('#bill-input');
 const peopleInput = document.querySelector('#people-input');
 
@@ -13,8 +18,24 @@ const peopleErrorMessage = document.querySelector('.calculator__people--error');
 
 const resetBtn = document.querySelector('.calculator__reset');
 
+/* 
+********************************
+GLOBAL VARIABLES:
+********************************
+*/
 let tipPercent = 0;
 let customTip = 0;
+
+/* 
+********************************
+FUNCTIONS:
+********************************
+*/
+function removeFocus(e) {
+  if (e.key === 'Enter') {
+    e.target.blur();
+  }
+}
 
 function handleUserInput() {
   let bill = billInput.value;
@@ -52,13 +73,7 @@ function handleUserInput() {
   customTipInput.value = customTip;
 }
 
-function removeFocus(e) {
-  if (e.key === 'Enter') {
-    e.target.blur();
-  }
-}
-
-function checkPeopleValue() {
+function handlePeopleValue() {
   const people = Number(peopleInput.value);
 
   peopleErrorMessage.classList.toggle('hidden', people !== 0);
@@ -123,29 +138,35 @@ function deselectDefaultTip() {
   });
 }
 
-[billInput, peopleInput, customTipInput].forEach(input => {
-  input.addEventListener('input', handleUserInput);
-  input.addEventListener('keydown', removeFocus);
-});
-
-billInput.addEventListener('change', updateTipAmount);
-tipInputs.forEach(tip => tip.addEventListener('change', getTip));
-peopleInput.addEventListener('change', updateTipAmount);
-peopleInput.addEventListener('change', checkPeopleValue);
-customTipInput.addEventListener('change', getCustomTip);
-
-resetBtn.addEventListener('click', () => {
+function resetInputs() {
   billInput.value = '';
   peopleInput.value = '';
   peopleErrorMessage.classList.add('hidden');
   peopleInput.classList.remove('calculator__input--error');
+}
 
-  deselectCustomTip();
-  deselectDefaultTip();
-  updateTipAmount();
+/* 
+********************************
+EVENT LISTENERS:
+********************************
+*/
+
+/* 
+*******
+Inputs:
+*******
+*/
+[billInput, peopleInput, customTipInput].forEach(input => {
+  input.addEventListener('input', handleUserInput);
+  input.addEventListener('keydown', removeFocus);
 });
+peopleInput.addEventListener('change', handlePeopleValue);
 
-// Input style when being used
+[billInput, peopleInput].forEach(input => input.addEventListener('change', updateTipAmount));
+tipInputs.forEach(tip => tip.addEventListener('change', getTip));
+customTipInput.addEventListener('change', getCustomTip);
+
+// Custom tip input style when being used
 customTipInput.addEventListener('focus', () => {
   deselectDefaultTip();
   percentSymbol.style.display = 'block';
@@ -153,7 +174,7 @@ customTipInput.addEventListener('focus', () => {
   customTipInput.style.color = 'var(--clr-grey-550)';
 });
 
-// Input style changes when clicked out of element.
+// Custom tip input style changes when clicked out of element.
 customTipInput.addEventListener('blur', () => {
   if (customTipInput.value === '') {
     percentSymbol.style.display = 'none';
@@ -164,11 +185,23 @@ customTipInput.addEventListener('blur', () => {
   }
 });
 
-// Dynamic Percent Symbol distance
+// Custom tip input - Dynamic Percent Symbol distance
 customTipInput.addEventListener('input', () => {
   if (customTipInput.value.length === 1) {
     percentSymbol.style.right = '2.25rem';
   } else if (customTipInput.value.length === 2) {
     percentSymbol.style.right = '1.75rem';
   }
+});
+
+/* 
+*******
+Reset Button:
+*******
+*/
+resetBtn.addEventListener('click', () => {
+  resetInputs();
+  deselectCustomTip();
+  deselectDefaultTip();
+  updateTipAmount();
 });
