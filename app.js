@@ -76,6 +76,9 @@ function updateTipAmount() {
     tipInputActive = customTip;
   }
 
+  const anyInput = people > 0 || bill > 0 || tipInputActive > 0;
+  resetBtn.classList.toggle('calculator__reset--active', anyInput);
+
   const inputsComplete = people > 0 && bill > 0 && tipInputActive > 0;
 
   const tip = inputsComplete ? (bill * tipInputActive) / people : 0;

@@ -355,10 +355,14 @@ Calculator Summary:
 
   font-size: var(--fs-sm);
   text-transform: uppercase;
+  color: var(--clr-green-800);
+  background-color: var(--clr-green-750);
+}
+
+.calculator__reset--active {
   color: var(--clr-green-900);
   background-color: var(--clr-green-400);
 }
-
 /* 
 ********************************
 FOOTER:
@@ -397,7 +401,7 @@ SHARED HOVER STATES:
 ********************************
 */
 .calculator__tip-label:hover,
-.calculator__reset:hover,
+.calculator__reset--active:hover,
 .calculator__input--custom:hover {
   cursor: pointer;
   color: var(--clr-green-900);
