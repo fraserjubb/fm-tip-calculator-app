@@ -187,17 +187,6 @@ Calculator Inputs & Buttons:
   background-position: left var(--space-xs-2) center;
   text-align: right;
   padding-right: var(--space-xs-2);
-
-  /* Remove the input arrows */
-  /* Firefox */
-  -moz-appearance: textfield;
-}
-
-/* Chrome, Safari, Edge */
-.calculator__input::-webkit-outer-spin-button,
-.calculator__input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .calculator__input::placeholder {
@@ -206,6 +195,7 @@ Calculator Inputs & Buttons:
 
 .calculator__input:hover {
   cursor: pointer;
+  outline: 2px solid var(--clr-green-400);
 }
 
 .calculator__input:focus {
@@ -226,7 +216,22 @@ Calculator Inputs & Buttons:
   background-image: url('/assets/images/icon-person.svg');
 }
 
-/* Tip Buttons */
+/* Autofill styles */
+/* Note: Autofill hides input icons in Chrome — acceptable for MVP / junior project */
+
+/* Chrome, Edge, Opera, Safari */
+.calculator__input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--clr-grey-50) inset !important;
+}
+
+/* Firefox */
+.calculator__input:-moz-autofill {
+  box-shadow: 0 0 0 1000px var(--clr-grey-50) inset;
+}
+
+/* 
+Tip Buttons 
+*/
 .calculator__tip-inputs-grid {
   display: grid;
   gap: var(--space-xs);
