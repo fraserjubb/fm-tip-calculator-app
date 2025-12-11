@@ -166,6 +166,38 @@ function clearInputs() {
   peopleInput.classList.remove('calculator__input--error');
 }
 
+function handleResetClick() {
+  clearInputs();
+  clearSelectedCustomTip();
+  clearSelectedPresetTip();
+  calculateTotals();
+}
+
+function handleCustomTipInput() {
+  if (customTipInputEl.value.length === 1) {
+    customTipPercentSymbol.style.right = '2.25rem';
+  } else if (customTipInputEl.value.length === 2) {
+    customTipPercentSymbol.style.right = '1.75rem';
+  }
+}
+
+function handleCustomTipBlur() {
+  if (customTipInputEl.value === '') {
+    customTipPercentSymbol.style.display = 'none';
+  }
+  if (customTipInputEl.value.length >= 1) {
+    customTipInputEl.style.color = 'var(--clr-green-900)';
+    customTipPercentSymbol.style.color = 'var(--clr-green-900)';
+  }
+}
+
+function handleCustomTipFocus() {
+  clearSelectedPresetTip();
+  customTipPercentSymbol.style.display = 'block';
+  customTipPercentSymbol.style.color = 'var(--clr-grey-550)';
+  customTipInputEl.style.color = 'var(--clr-grey-550)';
+}
+
 /* 
 ********************************
 EVENT LISTENERS:
@@ -191,30 +223,17 @@ billInput.addEventListener('change', removeTrailingDot);
 
 // Custom tip input style when being used
 customTipInputEl.addEventListener('focus', () => {
-  clearSelectedPresetTip();
-  customTipPercentSymbol.style.display = 'block';
-  customTipPercentSymbol.style.color = 'var(--clr-grey-550)';
-  customTipInputEl.style.color = 'var(--clr-grey-550)';
+  handleCustomTipFocus();
 });
 
 // Custom tip input style changes when clicked out of element.
 customTipInputEl.addEventListener('blur', () => {
-  if (customTipInputEl.value === '') {
-    customTipPercentSymbol.style.display = 'none';
-  }
-  if (customTipInputEl.value.length >= 1) {
-    customTipInputEl.style.color = 'var(--clr-green-900)';
-    customTipPercentSymbol.style.color = 'var(--clr-green-900)';
-  }
+  handleCustomTipBlur();
 });
 
 // Custom tip input - Dynamic Percent Symbol distance
 customTipInputEl.addEventListener('input', () => {
-  if (customTipInputEl.value.length === 1) {
-    customTipPercentSymbol.style.right = '2.25rem';
-  } else if (customTipInputEl.value.length === 2) {
-    customTipPercentSymbol.style.right = '1.75rem';
-  }
+  handleCustomTipInput();
 });
 
 /* 
@@ -223,8 +242,5 @@ Reset Button:
 *******
 */
 resetButton.addEventListener('click', () => {
-  clearInputs();
-  clearSelectedCustomTip();
-  clearSelectedPresetTip();
-  calculateTotals();
+  handleResetClick();
 });
