@@ -37,40 +37,54 @@ function blurOnEnter(e) {
   }
 }
 
-function handleUserInput() {
+function sanitizeBillInput() {
   let billInputValue = billInput.value;
-  let peopleInputValue = peopleInput.value;
-  let customTip = customTipInputEl.value;
 
   // Remove invalid characters (anything that's not digit or dot)
   billInputValue = billInputValue.replace(/[^0-9.]/g, '');
 
-  // Remove invalid characters (anything that's not digit)
-  peopleInputValue = peopleInputValue.replace(/[^0-9]/g, '');
-  customTip = customTip.replace(/[^0-9]/g, '');
-
   // Allow only one decimal point
-  const parts = billInputValue.split('.');
-  if (parts.length > 2) {
-    billInputValue = parts[0] + '.' + parts.slice(1).join('');
-  }
-
-  // Limit to two decimal places
-  if (parts[1]) {
-    parts[1] = parts[1].slice(0, 2);
-    billInputValue = parts[0] + '.' + parts[1];
+  let [integerPart, decimalPart] = billInputValue.split('.');
+  if (decimalPart) {
+    decimalPart = decimalPart.slice(0, 2);
+    billInputValue = `${integerPart}.${decimalPart}`;
   }
 
   // Expand length if bill is a higher value
-  if (parts[0].length >= 4 && billInputValue.includes('.')) {
-    billInput.maxLength = parts[0].length + 3;
+  if (integerPart.length >= 4 && billInputValue.includes('.')) {
+    billInput.maxLength = integerPart.length + 3;
   } else {
     billInput.maxLength = 6;
   }
 
   billInput.value = billInputValue;
+}
+
+function removeTrailingDot() {
+  if (billInput.value[billInput.value.length - 1] === '.') {
+    billInput.value = billInput.value.slice(0, -1);
+  }
+}
+
+function sanitizePeopleInput() {
+  let peopleInputValue = peopleInput.value;
+  // Remove invalid characters (anything that's not digit)
+  peopleInputValue = peopleInputValue.replace(/[^0-9]/g, '');
+
   peopleInput.value = peopleInputValue;
+}
+
+function sanitizeCustomTipInput() {
+  let customTip = customTipInputEl.value;
+  // Remove invalid characters (anything that's not digit)
+  customTip = customTip.replace(/[^0-9]/g, '');
+
   customTipInputEl.value = customTip;
+}
+function handleUserInput() {
+  sanitizeBillInput();
+  sanitizePeopleInput();
+  sanitizeCustomTipInput();
 }
 
 function handlePeopleValue() {
@@ -172,6 +186,8 @@ peopleInput.addEventListener('change', handlePeopleValue);
 [billInput, peopleInput].forEach(input => input.addEventListener('change', calculateTotals));
 tipRadioInputs.forEach(tip => tip.addEventListener('change', handleTipSelection));
 customTipInputEl.addEventListener('change', handleCustomTipEntry);
+
+billInput.addEventListener('change', removeTrailingDot);
 
 // Custom tip input style when being used
 customTipInputEl.addEventListener('focus', () => {
