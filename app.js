@@ -31,12 +31,11 @@ let customTipRate = 0;
 FUNCTIONS:
 ********************************
 */
-function blurOnEnter(e) {
-  if (e.key === 'Enter') {
-    e.target.blur();
-  }
-}
-
+/* 
+**********
+Sanitizer Functions:
+**********
+*/
 function sanitizeBillInput() {
   let billInputValue = billInput.value;
 
@@ -60,12 +59,6 @@ function sanitizeBillInput() {
   billInput.value = billInputValue;
 }
 
-function removeTrailingDot() {
-  if (billInput.value[billInput.value.length - 1] === '.') {
-    billInput.value = billInput.value.slice(0, -1);
-  }
-}
-
 function sanitizePeopleInput() {
   let peopleInputValue = peopleInput.value;
   // Remove invalid characters (anything that's not digit)
@@ -81,6 +74,12 @@ function sanitizeCustomTipInput() {
 
   customTipInputEl.value = customTip;
 }
+
+/* 
+**********
+Input / UI Handler Functions:
+**********
+*/
 function handleUserInput() {
   sanitizeBillInput();
   sanitizePeopleInput();
@@ -143,6 +142,11 @@ function handleCustomTipEntry() {
   calculateTotals();
 }
 
+/* 
+**********
+Selection / Clearing Functions:
+**********
+*/
 function clearSelectedCustomTip() {
   customTipRate = 0;
   customTipInputEl.value = '';
@@ -173,12 +177,16 @@ function handleResetClick() {
   calculateTotals();
 }
 
-function handleCustomTipInput() {
-  if (customTipInputEl.value.length === 1) {
-    customTipPercentSymbol.style.right = '2.25rem';
-  } else if (customTipInputEl.value.length === 2) {
-    customTipPercentSymbol.style.right = '1.75rem';
-  }
+/* 
+**********
+UI Styling / Focus / Blur Functions:
+**********
+*/
+function handleCustomTipFocus() {
+  clearSelectedPresetTip();
+  customTipPercentSymbol.style.display = 'block';
+  customTipPercentSymbol.style.color = 'var(--clr-grey-550)';
+  customTipInputEl.style.color = 'var(--clr-grey-550)';
 }
 
 function handleCustomTipBlur() {
@@ -191,11 +199,29 @@ function handleCustomTipBlur() {
   }
 }
 
-function handleCustomTipFocus() {
-  clearSelectedPresetTip();
-  customTipPercentSymbol.style.display = 'block';
-  customTipPercentSymbol.style.color = 'var(--clr-grey-550)';
-  customTipInputEl.style.color = 'var(--clr-grey-550)';
+function handleCustomTipInput() {
+  if (customTipInputEl.value.length === 1) {
+    customTipPercentSymbol.style.right = '2.25rem';
+  } else if (customTipInputEl.value.length === 2) {
+    customTipPercentSymbol.style.right = '1.75rem';
+  }
+}
+
+/* 
+**********
+Utility Functions:
+**********
+*/
+function blurOnEnter(e) {
+  if (e.key === 'Enter') {
+    e.target.blur();
+  }
+}
+
+function removeTrailingDot() {
+  if (billInput.value[billInput.value.length - 1] === '.') {
+    billInput.value = billInput.value.slice(0, -1);
+  }
 }
 
 /* 
@@ -206,32 +232,53 @@ EVENT LISTENERS:
 
 /* 
 *******
-Inputs:
+Input Elements – General input handling:
 *******
 */
 [billInput, peopleInput, customTipInputEl].forEach(input => {
   input.addEventListener('input', handleUserInput);
   input.addEventListener('keydown', blurOnEnter);
 });
+
+/* 
+*******
+People input specific:
+*******
+*/
 peopleInput.addEventListener('change', handlePeopleValue);
 
+/* 
+*******
+Trigger calculations on change:
+*******
+*/
 [billInput, peopleInput].forEach(input => input.addEventListener('change', calculateTotals));
 tipRadioInputs.forEach(tip => tip.addEventListener('change', handleTipSelection));
 customTipInputEl.addEventListener('change', handleCustomTipEntry);
 
+/* 
+*******
+Bill input – remove trailing dot:
+*******
+*/
 billInput.addEventListener('change', removeTrailingDot);
 
-// Custom tip input style when being used
+/* 
+*******
+Custom tip input – UI styling / focus / blur:
+*******
+*/
+// Style when being used
 customTipInputEl.addEventListener('focus', () => {
   handleCustomTipFocus();
 });
 
-// Custom tip input style changes when clicked out of element.
+// Style changes when clicked out of element.
 customTipInputEl.addEventListener('blur', () => {
   handleCustomTipBlur();
 });
 
-// Custom tip input - Dynamic Percent Symbol distance
+// Dynamic Percent Symbol distance
 customTipInputEl.addEventListener('input', () => {
   handleCustomTipInput();
 });
