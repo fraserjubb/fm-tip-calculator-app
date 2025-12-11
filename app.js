@@ -6,145 +6,149 @@ DOM SELECTORS:
 const billInput = document.querySelector('#bill-input');
 const peopleInput = document.querySelector('#people-input');
 
-const tipInputs = Array.from(document.querySelectorAll('.calculator__tip-input'));
+const tipRadioInputs = Array.from(document.querySelectorAll('.calculator__tip-input'));
 
-const customTipInput = document.querySelector('.calculator__input--custom');
-const percentSymbol = document.querySelector('.calculator__input--custom-container span');
+const customTipInputEl = document.querySelector('.calculator__input--custom');
+const customTipPercentSymbol = document.querySelector('.calculator__input--custom-container span');
 
-const tipDisplay = document.querySelector('#calculator__tip-amount');
-const totalDisplay = document.querySelector('#total');
+const tipPerPersonDisplay = document.querySelector('#calculator__tip-amount');
+const totalAmountDisplay = document.querySelector('#total');
 
-const peopleErrorMessage = document.querySelector('.calculator__people--error');
+const peopleErrorText = document.querySelector('.calculator__people--error');
 
-const resetBtn = document.querySelector('.calculator__reset');
+const resetButton = document.querySelector('.calculator__reset');
 
 /* 
 ********************************
 GLOBAL VARIABLES:
 ********************************
 */
-let tipPercent = 0;
-let customTip = 0;
+let selectedPresetTipRate = 0;
+let customTipRate = 0;
 
 /* 
 ********************************
 FUNCTIONS:
 ********************************
 */
-function removeFocus(e) {
+function blurOnEnter(e) {
   if (e.key === 'Enter') {
     e.target.blur();
   }
 }
 
 function handleUserInput() {
-  let bill = billInput.value;
-  let people = peopleInput.value;
-  let customTip = customTipInput.value;
+  let billInputValue = billInput.value;
+  let peopleInputValue = peopleInput.value;
+  let customTip = customTipInputEl.value;
 
   // Remove invalid characters (anything that's not digit or dot)
-  bill = bill.replace(/[^0-9.]/g, '');
+  billInputValue = billInputValue.replace(/[^0-9.]/g, '');
 
   // Remove invalid characters (anything that's not digit)
-  people = people.replace(/[^0-9]/g, '');
+  peopleInputValue = peopleInputValue.replace(/[^0-9]/g, '');
   customTip = customTip.replace(/[^0-9]/g, '');
 
   // Allow only one decimal point
-  const parts = bill.split('.');
+  const parts = billInputValue.split('.');
   if (parts.length > 2) {
-    bill = parts[0] + '.' + parts.slice(1).join('');
+    billInputValue = parts[0] + '.' + parts.slice(1).join('');
   }
 
   // Limit to two decimal places
   if (parts[1]) {
     parts[1] = parts[1].slice(0, 2);
-    bill = parts[0] + '.' + parts[1];
+    billInputValue = parts[0] + '.' + parts[1];
   }
 
   // Expand length if bill is a higher value
-  if (parts[0].length >= 4 && bill.includes('.')) {
+  if (parts[0].length >= 4 && billInputValue.includes('.')) {
     billInput.maxLength = parts[0].length + 3;
   } else {
     billInput.maxLength = 6;
   }
 
-  billInput.value = bill;
-  peopleInput.value = people;
-  customTipInput.value = customTip;
+  billInput.value = billInputValue;
+  peopleInput.value = peopleInputValue;
+  customTipInputEl.value = customTip;
 }
 
 function handlePeopleValue() {
-  const peopleRaw = peopleInput.value;
+  const peopleInputValue = peopleInput.value;
 
-  peopleErrorMessage.classList.toggle('hidden', peopleRaw !== '0');
-  peopleInput.classList.toggle('calculator__input--error', peopleRaw === '0');
+  peopleErrorText.classList.toggle('hidden', peopleInputValue !== '0');
+  peopleInput.classList.toggle('calculator__input--error', peopleInputValue === '0');
 }
 
-function updateTipAmount() {
-  const peopleRaw = peopleInput.value;
-  const billRaw = billInput.value;
+function calculateTotals() {
+  const peopleInputValue = peopleInput.value;
+  const billInputValue = billInput.value;
 
-  const people = Number(peopleRaw);
-  const bill = Number(billRaw);
+  const peopleCount = Number(peopleInputValue);
+  const billAmount = Number(billInputValue);
 
-  let tipInputActive = 0;
-  if (tipPercent > 0) {
-    tipInputActive = tipPercent;
-  } else if (customTip > 0) {
-    tipInputActive = customTip;
+  // Which tip source is active: default buttons or custom %
+  let activeTipRate = 0;
+  if (selectedPresetTipRate > 0) {
+    activeTipRate = selectedPresetTipRate;
+  } else if (customTipRate > 0) {
+    activeTipRate = customTipRate;
   }
 
-  const anyInput = peopleRaw !== '' || billRaw !== '' || tipInputActive > 0;
-  resetBtn.classList.toggle('calculator__reset--active', anyInput);
+  // Reset button should show if any field has *visible* input
+  const isAnyFieldFilled = peopleInputValue !== '' || billInputValue !== '' || activeTipRate > 0;
+  resetButton.classList.toggle('calculator__reset--active', isAnyFieldFilled);
 
-  const inputsComplete = people > 0 && bill > 0 && tipInputActive > 0;
+  // All required values present?
+  const hasAllInputs = peopleCount > 0 && billAmount > 0 && activeTipRate > 0;
 
-  const tip = inputsComplete ? (bill * tipInputActive) / people : 0;
-  const total = inputsComplete ? tip * people + bill : 0;
+  // Calculations
+  const tipPerPerson = hasAllInputs ? (billAmount * activeTipRate) / peopleCount : 0;
+  const totalPayment = hasAllInputs ? tipPerPerson * peopleCount + billAmount : 0;
 
-  tipDisplay.textContent = `$${tip.toFixed(2)}`;
-  totalDisplay.textContent = `$${total.toFixed(2)}`;
+  tipPerPersonDisplay.textContent = `$${tipPerPerson.toFixed(2)}`;
+  totalAmountDisplay.textContent = `$${totalPayment.toFixed(2)}`;
 }
 
-function getTip(e) {
-  deselectCustomTip();
-  tipInputs.forEach(tip => {
+function handleTipSelection(e) {
+  clearSelectedCustomTip();
+  tipRadioInputs.forEach(tip => {
     const tipValue = tip.nextElementSibling;
     tipValue.classList.toggle('calculator__tip-label--selected', tip.checked);
   });
-  tipPercent = Number(e.currentTarget.value);
+  selectedPresetTipRate = Number(e.currentTarget.value);
 
-  updateTipAmount();
+  calculateTotals();
 }
 
-function getCustomTip() {
-  deselectDefaultTip();
+function handleCustomTipEntry() {
+  clearSelectedPresetTip();
 
-  customTip = Number(customTipInput.value) / 100;
-  customTipInput.classList.add('calculator__tip-label--selected');
-  updateTipAmount();
+  customTipRate = Number(customTipInputEl.value) / 100;
+  customTipInputEl.classList.add('calculator__tip-label--selected');
+  calculateTotals();
 }
 
-function deselectCustomTip() {
-  customTip = 0;
-  customTipInput.value = '';
-  customTipInput.classList.remove('calculator__tip-label--selected');
-  percentSymbol.style.display = 'none';
+function clearSelectedCustomTip() {
+  customTipRate = 0;
+  customTipInputEl.value = '';
+  customTipInputEl.classList.remove('calculator__tip-label--selected');
+  customTipPercentSymbol.style.display = 'none';
 }
 
-function deselectDefaultTip() {
-  tipPercent = 0;
-  tipInputs.forEach(tip => {
+function clearSelectedPresetTip() {
+  selectedPresetTipRate = 0;
+  tipRadioInputs.forEach(tip => {
     const tipValue = tip.nextElementSibling;
     tipValue.classList.remove('calculator__tip-label--selected');
     tip.checked = false;
   });
 }
 
-function resetInputs() {
+function clearInputs() {
   billInput.value = '';
   peopleInput.value = '';
-  peopleErrorMessage.classList.add('hidden');
+  peopleErrorText.classList.add('hidden');
   peopleInput.classList.remove('calculator__input--error');
 }
 
@@ -159,41 +163,41 @@ EVENT LISTENERS:
 Inputs:
 *******
 */
-[billInput, peopleInput, customTipInput].forEach(input => {
+[billInput, peopleInput, customTipInputEl].forEach(input => {
   input.addEventListener('input', handleUserInput);
-  input.addEventListener('keydown', removeFocus);
+  input.addEventListener('keydown', blurOnEnter);
 });
 peopleInput.addEventListener('change', handlePeopleValue);
 
-[billInput, peopleInput].forEach(input => input.addEventListener('change', updateTipAmount));
-tipInputs.forEach(tip => tip.addEventListener('change', getTip));
-customTipInput.addEventListener('change', getCustomTip);
+[billInput, peopleInput].forEach(input => input.addEventListener('change', calculateTotals));
+tipRadioInputs.forEach(tip => tip.addEventListener('change', handleTipSelection));
+customTipInputEl.addEventListener('change', handleCustomTipEntry);
 
 // Custom tip input style when being used
-customTipInput.addEventListener('focus', () => {
-  deselectDefaultTip();
-  percentSymbol.style.display = 'block';
-  percentSymbol.style.color = 'var(--clr-grey-550)';
-  customTipInput.style.color = 'var(--clr-grey-550)';
+customTipInputEl.addEventListener('focus', () => {
+  clearSelectedPresetTip();
+  customTipPercentSymbol.style.display = 'block';
+  customTipPercentSymbol.style.color = 'var(--clr-grey-550)';
+  customTipInputEl.style.color = 'var(--clr-grey-550)';
 });
 
 // Custom tip input style changes when clicked out of element.
-customTipInput.addEventListener('blur', () => {
-  if (customTipInput.value === '') {
-    percentSymbol.style.display = 'none';
+customTipInputEl.addEventListener('blur', () => {
+  if (customTipInputEl.value === '') {
+    customTipPercentSymbol.style.display = 'none';
   }
-  if (customTipInput.value.length >= 1) {
-    customTipInput.style.color = 'var(--clr-green-900)';
-    percentSymbol.style.color = 'var(--clr-green-900)';
+  if (customTipInputEl.value.length >= 1) {
+    customTipInputEl.style.color = 'var(--clr-green-900)';
+    customTipPercentSymbol.style.color = 'var(--clr-green-900)';
   }
 });
 
 // Custom tip input - Dynamic Percent Symbol distance
-customTipInput.addEventListener('input', () => {
-  if (customTipInput.value.length === 1) {
-    percentSymbol.style.right = '2.25rem';
-  } else if (customTipInput.value.length === 2) {
-    percentSymbol.style.right = '1.75rem';
+customTipInputEl.addEventListener('input', () => {
+  if (customTipInputEl.value.length === 1) {
+    customTipPercentSymbol.style.right = '2.25rem';
+  } else if (customTipInputEl.value.length === 2) {
+    customTipPercentSymbol.style.right = '1.75rem';
   }
 });
 
@@ -202,9 +206,9 @@ customTipInput.addEventListener('input', () => {
 Reset Button:
 *******
 */
-resetBtn.addEventListener('click', () => {
-  resetInputs();
-  deselectCustomTip();
-  deselectDefaultTip();
-  updateTipAmount();
+resetButton.addEventListener('click', () => {
+  clearInputs();
+  clearSelectedCustomTip();
+  clearSelectedPresetTip();
+  calculateTotals();
 });
