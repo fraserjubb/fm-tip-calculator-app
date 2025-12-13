@@ -36,6 +36,16 @@ This is a solution to [this challenge on Frontend Mentor](https://www.frontendme
 - JavaScript
 - Desktop-First Workflow
 
+### Enhancements Beyond the Brief
+
+While this challenge is labelled “Junior” on Frontend Mentor, I’ve implemented a few enhancements that go slightly beyond the brief:
+
+- Text inputs with sanitisation to control decimals, max values, and prevent invalid characters.
+- Defensive validation to prevent invalid calculations (e.g., zero people, trailing decimals).
+- Ensured only one tip source (preset or custom) can be active at a time.
+- Small UX enhancements: blur on Enter, dynamic % symbol positioning.
+- Tip calculations only occur when all required inputs are present to avoid partial or misleading values.
+
 ### What I Learned
 
 In this particular project:
