@@ -48,24 +48,36 @@ While this challenge is labelled “Junior” on Frontend Mentor, I’ve impleme
 
 ### What I Learned
 
-In this particular project:
+In this project, I gained experience with:
 
-1.
+1. Hiding radio inputs with CSS while still allowing them to be selected via their labels.
 
-```css
-[INSERT ANY CODE HERE]
+2. Adding a visually-hidden <h1> to provide a proper page title, since the design has no visible heading. This improves accessibility for screen readers and SEO.
+
+3. Using the `change` event listener for better control of element behavior.
+
+4. Using array destructuring with `split()` to quickly assign the integer and decimal parts of a string to separate variables, making input formatting and decimal control easier:
+
+```js
+let [integerPart, decimalPart] = '123.45'.split('.');
+// integerPart = "123", decimalPart = "45"
 ```
+
+5. Implemented defensive input validation to prevent invalid calculation states (e.g., zero people, trailing decimals), ensuring reliable app behavior.
+
+6. Managed mutually exclusive tip selection (preset vs. custom) in JavaScript, demonstrating control over dynamic UI states.
+
+7. Learned to dynamically adjust UI elements (like the % symbol in the custom tip input) based on user input length, improving UX polish.
 
 ### Continued Development
 
 After submitting this project, I wish to develop the following:
 
-1. [INSERT TEXT HERE]
+1. More JavaScript practice to increase my writing speed and thought process on projects.
 
 ### Useful Resources
 
-- Nothing of note used for this project.
-- [INSERT TEXT TO APPEAR HERE (SPECIFY MEDIA TYPE HERE)](link) - [DESCRIPTION OF HOW IT HELPED HERE]
+- [MDN page for radio inputs (Documentation)](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio)
 
 ## Noteworthy Updates Since Initial Submission
 
@@ -81,4 +93,3 @@ After submitting this project, I wish to develop the following:
 <a href="mailto:fraserjubb.dev@gmail.com"><img height="30px" align="left" alt="Gmail" style="padding-right:10px" title="Gmail" src="https://img.shields.io/badge/Gmail-D14836?style=plastic&logo=gmail&logoColor=white"/></a>
 
 <br/>
-# fm-tip-calculator-app
