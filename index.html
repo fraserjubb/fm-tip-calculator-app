@@ -48,7 +48,8 @@
                 <label class="calculator__tip-label" for="fifty">50%</label>
               </div>
               <div class="calculator__input--custom-container">
-                <input class="calculator__input calculator__input--custom" type="text" inputmode="decimal" maxlength="2" placeholder="Custom" autocomplete="off" />
+                <label for="custom-tip" class="sr-only">Custom tip percentage</label>
+                <input id="custom-tip" class="calculator__input calculator__input--custom" type="text" inputmode="decimal" maxlength="2" placeholder="Custom" autocomplete="off" />
                 <span>%</span>
               </div>
             </div>
@@ -56,9 +57,9 @@
           <div class="calculator__setup-group">
             <div class="calculator__people-title-container">
               <label class="calculator__setup-title" for="people-input">Number of People</label>
-              <p class="calculator__people--error hidden">Can't be zero</p>
+              <p id="people-error" class="calculator__people--error hidden" role="alert">Can't be zero</p>
             </div>
-            <input id="people-input" class="calculator__input" type="text" inputmode="numeric" maxlength="3" placeholder="0" autocomplete="off" />
+            <input id="people-input" class="calculator__input" type="text" inputmode="numeric" maxlength="3" placeholder="0" autocomplete="off" aria-describedby="people-error" />
           </div>
         </section>
         <section class="calculator__summary">
