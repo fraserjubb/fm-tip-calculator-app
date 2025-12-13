@@ -55,9 +55,9 @@
             </div>
           </fieldset>
           <div class="calculator__setup-group">
-            <div class="calculator__people-title-container" aria-live="assertive">
+            <div class="calculator__people-title-container">
               <label class="calculator__setup-title" for="people-input">Number of People</label>
-              <p id="people-error" class="calculator__people--error hidden" role="alert">Can't be zero</p>
+              <p id="people-error" class="calculator__people--error hidden" role="alert" aria-live="assertive">Can't be zero</p>
             </div>
             <input id="people-input" class="calculator__input" type="text" inputmode="numeric" maxlength="3" placeholder="0" autocomplete="off" aria-describedby="people-error" />
           </div>

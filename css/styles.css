@@ -248,6 +248,12 @@ Tip Buttons
   background-color: var(--clr-green-400);
 }
 
+/* Ensure visually hidden inputs are still focusable */
+.calculator__tip-input:focus + .calculator__tip-label {
+  outline: 2px solid #26c2ae; /* example highlight color */
+  outline-offset: 2px;
+}
+
 /* Custom Tip Input */
 .calculator__input--custom-container {
   position: relative;
