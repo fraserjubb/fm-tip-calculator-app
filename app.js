@@ -93,10 +93,12 @@ function handlePeopleValue() {
     console.log(peopleInputValue);
     peopleErrorText.textContent = "Can't be zero";
     peopleErrorText.classList.remove('hidden');
+    peopleErrorText.setAttribute('aria-hidden', 'false');
     peopleInput.classList.add('calculator__input--error');
   } else {
     peopleErrorText.textContent = '';
     peopleErrorText.classList.add('hidden');
+    peopleErrorText.setAttribute('aria-hidden', 'true');
     peopleInput.classList.remove('calculator__input--error');
   }
 }
@@ -119,6 +121,7 @@ function updateTotals() {
   // Reset button should show if any field has *visible* input
   const isAnyFieldFilled = peopleInput.value.length > 0 || billInput.value.length > 0 || activeTipRate > 0;
   resetButton.classList.toggle('calculator__reset--active', isAnyFieldFilled);
+  resetButton.setAttribute('aria-disabled', !isAnyFieldFilled);
 
   // All required values present?
   const hasAllInputs = peopleInput.value.length > 0 && billInput.value.length > 0 && activeTipRate > 0;
@@ -165,7 +168,7 @@ function clearSelectedCustomTip() {
   customTipRate = 0;
   customTipInputEl.value = '';
   customTipInputEl.classList.remove('calculator__tip-label--selected');
-  customTipPercentSymbol.style.display = 'none';
+  customTipPercentSymbol.style.visibility = 'hidden';
 }
 
 function clearSelectedPresetTip() {
@@ -198,14 +201,14 @@ UI Styling / Focus / Blur Functions:
 */
 function handleCustomTipFocus() {
   clearSelectedPresetTip();
-  customTipPercentSymbol.style.display = 'block';
+  customTipPercentSymbol.style.visibility = 'visible';
   customTipPercentSymbol.style.color = 'var(--clr-grey-550)';
   customTipInputEl.style.color = 'var(--clr-grey-550)';
 }
 
 function handleCustomTipBlur() {
   if (customTipInputEl.value === '') {
-    customTipPercentSymbol.style.display = 'none';
+    customTipPercentSymbol.style.visibility = 'hidden';
   }
   if (customTipInputEl.value.length >= 1) {
     customTipInputEl.style.color = 'var(--clr-green-900)';
@@ -303,5 +306,7 @@ Reset Button:
 *******
 */
 resetButton.addEventListener('click', () => {
+  if (resetButton.getAttribute('aria-disabled') === 'true') return;
   handleResetClick();
+  console.log('clicked');
 });

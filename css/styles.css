@@ -283,7 +283,7 @@ Tip Buttons
 
 /* Percentage symbol in custom tip input */
 .calculator__input--custom-container span {
-  display: none;
+  visibility: hidden;
   position: absolute;
   right: 1.3rem;
   top: 50%;
