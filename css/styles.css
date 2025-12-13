@@ -113,16 +113,6 @@ svg {
 
 /* 
 ********************************
-HEADER:
-********************************
-*/
-.header {
-}
-
-.header__logo {
-}
-/* 
-********************************
 MAIN:
 ********************************
 */
@@ -217,7 +207,7 @@ Calculator Inputs & Buttons:
 }
 
 /* Autofill styles */
-/* Note: Autofill hides input icons in Chrome — acceptable for MVP / junior project */
+/* Note: Autofill hides input icons in Browsers */
 
 /* Chrome, Edge, Opera, Safari */
 .calculator__input:-webkit-autofill {
