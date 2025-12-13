@@ -93,34 +93,40 @@ function handlePeopleValue() {
   peopleInput.classList.toggle('calculator__input--error', peopleInputValue === '0');
 }
 
-function calculateTotals() {
-  const peopleInputValue = peopleInput.value;
-  const billInputValue = billInput.value;
-
-  const peopleCount = Number(peopleInputValue);
-  const billAmount = Number(billInputValue);
-
-  // Which tip source is active: default buttons or custom %
+function getActiveTip() {
   let activeTipRate = 0;
   if (selectedPresetTipRate > 0) {
     activeTipRate = selectedPresetTipRate;
   } else if (customTipRate > 0) {
     activeTipRate = customTipRate;
   }
+  return activeTipRate;
+}
+
+function updateTotals() {
+  const peopleCount = Number(peopleInput.value);
+  const billAmount = Number(billInput.value);
+  const activeTipRate = getActiveTip();
 
   // Reset button should show if any field has *visible* input
-  const isAnyFieldFilled = peopleInputValue !== '' || billInputValue !== '' || activeTipRate > 0;
+  const isAnyFieldFilled = peopleInput.value.length > 0 || billInput.value.length > 0 || activeTipRate > 0;
   resetButton.classList.toggle('calculator__reset--active', isAnyFieldFilled);
 
   // All required values present?
-  const hasAllInputs = peopleCount > 0 && billAmount > 0 && activeTipRate > 0;
+  const hasAllInputs = peopleInput.value.length > 0 && billInput.value.length > 0 && activeTipRate > 0;
 
-  // Calculations
-  const tipPerPerson = hasAllInputs ? (billAmount * activeTipRate) / peopleCount : 0;
-  const totalPayment = hasAllInputs ? tipPerPerson * peopleCount + billAmount : 0;
+  if (!hasAllInputs) {
+    tipPerPersonDisplay.textContent = `$0.00`;
+    totalAmountDisplay.textContent = `$0.00`;
+    return;
+  }
+
+  // Calculations if all inputs are present
+  const tipPerPerson = (billAmount * activeTipRate) / peopleCount;
+  const totalPerPerson = billAmount / peopleCount + tipPerPerson;
 
   tipPerPersonDisplay.textContent = `$${tipPerPerson.toFixed(2)}`;
-  totalAmountDisplay.textContent = `$${totalPayment.toFixed(2)}`;
+  totalAmountDisplay.textContent = `$${totalPerPerson.toFixed(2)}`;
 }
 
 function handleTipSelection(e) {
@@ -131,7 +137,7 @@ function handleTipSelection(e) {
   });
   selectedPresetTipRate = Number(e.currentTarget.value);
 
-  calculateTotals();
+  updateTotals();
 }
 
 function handleCustomTipEntry() {
@@ -139,7 +145,7 @@ function handleCustomTipEntry() {
 
   customTipRate = Number(customTipInputEl.value) / 100;
   customTipInputEl.classList.add('calculator__tip-label--selected');
-  calculateTotals();
+  updateTotals();
 }
 
 /* 
@@ -174,7 +180,7 @@ function handleResetClick() {
   clearInputs();
   clearSelectedCustomTip();
   clearSelectedPresetTip();
-  calculateTotals();
+  updateTotals();
 }
 
 /* 
@@ -199,7 +205,7 @@ function handleCustomTipBlur() {
   }
 }
 
-function handleCustomTipInput() {
+function adjustCustomTipSymbolPosition() {
   if (customTipInputEl.value.length === 1) {
     customTipPercentSymbol.style.right = '2.25rem';
   } else if (customTipInputEl.value.length === 2) {
@@ -252,7 +258,7 @@ peopleInput.addEventListener('change', handlePeopleValue);
 Trigger calculations on change:
 *******
 */
-[billInput, peopleInput].forEach(input => input.addEventListener('change', calculateTotals));
+[billInput, peopleInput].forEach(input => input.addEventListener('change', updateTotals));
 tipRadioInputs.forEach(tip => tip.addEventListener('change', handleTipSelection));
 customTipInputEl.addEventListener('change', handleCustomTipEntry);
 
@@ -280,7 +286,7 @@ customTipInputEl.addEventListener('blur', () => {
 
 // Dynamic Percent Symbol distance
 customTipInputEl.addEventListener('input', () => {
-  handleCustomTipInput();
+  adjustCustomTipSymbolPosition();
 });
 
 /* 
