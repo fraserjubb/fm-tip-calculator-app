@@ -89,8 +89,16 @@ function handleUserInput() {
 function handlePeopleValue() {
   const peopleInputValue = peopleInput.value;
 
-  peopleErrorText.classList.toggle('hidden', peopleInputValue !== '0');
-  peopleInput.classList.toggle('calculator__input--error', peopleInputValue === '0');
+  if (peopleInputValue === '0') {
+    console.log(peopleInputValue);
+    peopleErrorText.textContent = "Can't be zero";
+    peopleErrorText.classList.remove('hidden');
+    peopleInput.classList.add('calculator__input--error');
+  } else {
+    peopleErrorText.textContent = '';
+    peopleErrorText.classList.add('hidden');
+    peopleInput.classList.remove('calculator__input--error');
+  }
 }
 
 function getActiveTip() {
