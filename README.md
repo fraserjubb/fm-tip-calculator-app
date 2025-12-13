@@ -23,7 +23,7 @@ This is a solution to [this challenge on Frontend Mentor](https://www.frontendme
 
 ### Project Links
 
-- Solution URL: [Click Here](INSERT URL HERE)
+- Solution URL: [Click Here](https://fm-tipcalculatorapp-fraser.netlify.app/)
 - Live Site URL: [Click Here](INSERT URL HERE)
 - Frontend Mentor Profile: [@fraserjubb](https://www.frontendmentor.io/profile/fraserjubb)
 
@@ -52,7 +52,7 @@ In this project, I gained experience with:
 
 1. Hiding radio inputs with CSS while still allowing them to be selected via their labels.
 
-2. Adding a visually-hidden <h1> to provide a proper page title, since the design has no visible heading. This improves accessibility for screen readers and SEO.
+2. Adding a visually-hidden `<h1>` to provide a proper page title, since the design has no visible heading. This improves accessibility for screen readers and SEO.
 
 3. Using the `change` event listener for better control of element behavior.
 
