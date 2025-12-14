@@ -23,8 +23,8 @@ This is a solution to [this challenge on Frontend Mentor](https://www.frontendme
 
 ### Project Links
 
-- Solution URL: [Click Here](https://fm-tipcalculatorapp-fraser.netlify.app/)
-- Live Site URL: [Click Here](INSERT URL HERE)
+- Solution URL: [Click Here](https://www.frontendmentor.io/solutions/tip-calculator-app---challenge-15-fXbXejIGtB)
+- Live Site URL: [Click Here](https://fm-tipcalculatorapp-fraser.netlify.app/)
 - Frontend Mentor Profile: [@fraserjubb](https://www.frontendmentor.io/profile/fraserjubb)
 
 ## My Process
